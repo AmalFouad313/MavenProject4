@@ -1,5 +1,6 @@
   Feature: Social Media Functionality
 
+    @SmokeTest
     Scenario: Verify Social Media URL
       Given Navigate to aoutomationpractice
       When Click on sing button and enter the username and password"FalcoN"

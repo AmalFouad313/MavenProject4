@@ -1,4 +1,4 @@
-package StepDefinition;
+package StepDefinitions;
 
 import POM.SocialMedia;
 import cucumber.api.java.en.Then;
