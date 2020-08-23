@@ -1,5 +1,6 @@
 package StepDefinitions;
 
+import POM.ParentClass;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -7,43 +8,47 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import Utilitis.Driver;
+import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
-public class LoginSteps {
-    WebDriver driver;
+public class LoginSteps extends ParentClass {
 
-
-
-    @Given("^Navigate to aoutomationpractice$")
-    public void navigate_to_aoutomationpractice()  {
+    @Given("^Navigate to webappsecurity$")
+    public void navigate_to_webappsecurity()  {
 
         driver = Driver.getDriver();
         driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
-        driver.get("http://automationpractice.com/index.php ");
+        driver.get("http://zero.webappsecurity.com/login.html");
         driver.manage().window().maximize();
-
     }
 
-    @When("^Click on sing button and enter the username and password\"([^\"]*)\"$")
-    public void click_on_sing_button_and_enter_the_username_and_password(String arg1) throws Throwable {
+    @When("^Enter the \"([^\"]*)\" and \"([^\"]*)\"$")
+    public void Enter_the_username_and_password(String arg1, String arg2) {
 
-        WebElement signIn = driver.findElement(By.cssSelector(".login"));
+        WebElement username = driver.findElement(By.id("user_login"));
+        username.sendKeys(arg1);
+
+        WebElement password = driver.findElement(By.id("user_password"));
+        password.sendKeys(arg2);
+
+        WebElement signIn = driver.findElement(By.cssSelector("input[value='Sign in']"));
         signIn.click();
 
-        WebElement email = driver.findElement(By.cssSelector("#email"));
-        email.sendKeys("doganaykurt@gmail.com");
+       // driver.findElement(By.id("primary-button")).click();
 
-        WebElement password = driver.findElement(By.id("passwd"));
-        password.sendKeys(arg1);
+      //  driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+
+       // driver.switchTo().alert().accept();
 
     }
 
     @Then("^User should login successfully$")
-    public void user_should_login_successfully()  {
+    public void User_should_login_successfully()  {
 
-        WebElement singInButton = driver.findElement(By.id("SubmitLogin"));
-        singInButton.click();
+        String currentURL = driver.getCurrentUrl();
+        String expectedURL = "http://zero.webappsecurity.com/bank/account-summary.html";
+        Assert.assertEquals(currentURL,expectedURL);
 
     }
 

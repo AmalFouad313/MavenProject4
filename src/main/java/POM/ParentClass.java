@@ -13,10 +13,8 @@ import java.util.Set;
 
 public class ParentClass {
 
-//    In this class we need two thinks one is driver second one is a WebDriverWait
-
-    WebDriver driver;
-    WebDriverWait wait;
+    public WebDriver driver;
+    public WebDriverWait wait;
 
     public ParentClass() {
 
@@ -29,7 +27,6 @@ public class ParentClass {
     public void clickFunction(WebElement element) {
 
         waitUntilClickable(element);
-        scrollToElement(element);
         element.click();
 
 
